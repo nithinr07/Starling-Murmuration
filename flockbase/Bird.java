@@ -55,7 +55,17 @@ abstract public class Bird {
 	// to be implemented by derived classes to make the bird move for one
 	// timestep
 	abstract protected void updatePos();
-
+	
+	public static int getMaxSpeed() 
+	{
+		return maxSpeed;
+	}
+	
+	public static void setMaxSpeed(int speed) {
+		maxSpeed = speed;
+	}
+	
+	private static int maxSpeed = 10;
 	private Position pos;
 	private Flock flock;
 	private Position target;

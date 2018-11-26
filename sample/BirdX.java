@@ -17,18 +17,18 @@ public class BirdX extends flockbase.Bird {
   public String getName() {
     String name = "";
     if (!isLeader)
-      name = "BirdX";
+      name = "IMT2017511";
     else
-      name = "BirdX(Leader)";
+      name = "IMT2017511(Leader)";
     return name;
   }
 
-  boolean isWithinLimit(Bird bird, ArrayList<Bird> birds) {
-    Position position = bird.getPos();
+  boolean isWithinLimit(ArrayList<Bird> birds) {
+    Position position = this.getPos();
     boolean isNear = false;
-    for(Bird b : birds) {
+    for (Bird b : birds) {
       Position pos = b.getPos();
-      if(position.getX() - pos.getX() < 2 && position.getY() - pos.getY() < 2) {
+      if (position.getX() != 0 && pos.getX() != 0 && position.getX() - pos.getX() < 1 && position.getY() != 0 && pos.getY() != 0 && position.getY() - pos.getY() < 1) {
         isNear = true;
         break;
       }
@@ -36,31 +36,31 @@ public class BirdX extends flockbase.Bird {
     return isNear;
   }
 
-  boolean isWithinTargetX(Bird bird, ArrayList<Bird> birds) {
-    Position position = bird.getPos();
+  boolean isWithinTargetX(ArrayList<Bird> birds) {
+    flockbase.Position position = this.getPos();
     boolean isNear = false;
-    for(Bird b : birds) {
+    for (Bird b : birds) {
       Position pos = b.getPos();
-      if(position.getX() - pos.getX() < 2) {
+      if (position.getX() - pos.getX() < 2) {
         isNear = true;
         break;
       }
     }
-    return isNear;    
+    return isNear;
   }
 
-boolean isWithinTargetY(Bird bird, ArrayList<Bird> birds) {
-  Position position = bird.getPos();
-  boolean isNear = false;
-  for(Bird b : birds) {
-    Position pos = b.getPos();
-    if(position.getX() - pos.getX() < 2) {
-      isNear = true;
-      break;
+  boolean isWithinTargetY(ArrayList<Bird> birds) {
+    Position position = this.getPos();
+    boolean isNear = false;
+    for (Bird b : birds) {
+      Position pos = b.getPos();
+      if (position.getY() - pos.getY() < 2) {
+        isNear = true;
+        break;
+      }
     }
+    return isNear;
   }
-  return isNear;  
-}
 
   protected void updatePos() {
     Position currPos = getPos();
@@ -74,12 +74,22 @@ boolean isWithinTargetY(Bird bird, ArrayList<Bird> birds) {
     }
     int xt = getTarget().getX();
     int yt = getTarget().getY();
-    double dy;
-    double dx;
+    double dy = 0.0D;
+    double dx = 0.0D;
+    boolean targetState = false;
     if ((xt == x) && (yt == y)) {
-      dx = 0.0D;
-      dy = 0.0D;
+      if (targetState) {
+        dx = 2.0D;
+        dy = 2.0D;
+      } else {
+        dx = -2.0D;
+        dy = -2.0D;
+      }
     } else {
+      if(isWithinTargetX(flockMembers) || isWithinTargetY(flockMembers)) {
+        dx = 0.0D;
+        dy = 0.0D;
+      }
       if (xt == x) {
         if (yt > y) {
           dy = 1.0D;
@@ -104,7 +114,14 @@ boolean isWithinTargetY(Bird bird, ArrayList<Bird> birds) {
         }
       }
     }
-    setPos(x + (int) dx, y + (int) dy);
+    // } else {
+    //   if(isLeader) {
+    //     dx = 3.0D;
+    //     dy = 3.0D;
+    //   }
+    // }
+    if((x + (int) dx <= 1000 && y + (int) dy <= 1000) || (x + (int) dx >= 0 && y + (int) dy >= 0))
+      setPos(x + (int) dx, y + (int) dy);
   }
 
   public void becomeLeader() {

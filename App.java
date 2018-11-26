@@ -85,7 +85,7 @@ class App {
 		System.out.println("New target: "+ x + " + " + y);
 		currentFlock.getLeader().setTarget(x, y);
 		if(newFlock != null)
-			newFlock.getLeader().setTarget(x, y);
+			newFlock.getLeader().setTarget(y, x);
 	}
 	
 	void setLeader(Bird b){
@@ -95,7 +95,7 @@ class App {
 	
 
 	private FlockDisplay disp;
-	private int dispTimeStep = 200; // millisecs - change this as needed
+	private int dispTimeStep = 50; // millisecs - change this as needed
 	private int flapTimeStep = 500; // millisecs - change this as needed
 	private ArrayList<Bird> birds;
 	private Flock currentFlock, newFlock;

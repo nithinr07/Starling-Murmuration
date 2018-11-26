@@ -54,7 +54,6 @@ public class FlockY extends flockbase.Flock {
   }
 
   public void joinFlock(flockbase.Flock f) {
-    System.out.println("join flock");
     getLeader().retireLead();
     for(Bird bird : getBirds()) {
       f.addBird(bird);
