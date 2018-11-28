@@ -20,6 +20,12 @@ abstract public class Flock {
 	// return the current leader
 	abstract public Bird getLeader();
 	
+	// abstract public Position cohesion(Bird bird);
+
+	abstract public Position keepDistance(Bird bird);
+
+	// abstract public Position matchVelocity(Bird bird);
+
 	// split with the bird at pos as the leader of new flock
 	// Returns the new flock formed
 	abstract public Flock split(int pos); 

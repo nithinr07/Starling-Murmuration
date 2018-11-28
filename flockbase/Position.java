@@ -7,6 +7,8 @@ public class Position {
 			y = py;
 		}
 
+		public Position() {}
+
 		public int getX() {
 			return x;
 		}

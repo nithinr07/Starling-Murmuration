@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class BirdX extends flockbase.Bird {
-  private int speed = 5;
+  private Position speed = new Position(10, 10);
   private boolean isLeader;
   private double radius = 50.0D;
 
@@ -22,6 +22,14 @@ public class BirdX extends flockbase.Bird {
     else
       name = "IMT2017511(Leader)";
     return name;
+  }
+
+  public Position getSpeed() {
+    return speed;
+  }
+
+  public void setSpeed(int x, int y) {
+    speed.setPos(x, y);
   }
 
   double distanceBetweenBirds(Bird bird) {
@@ -80,7 +88,7 @@ public class BirdX extends flockbase.Bird {
     Position currPos = getPos();
     int x = currPos.getX();
     int y = currPos.getY();
-    flockbase.Flock flock = this.getFlock();
+    Flock flock = this.getFlock();
     ArrayList<flockbase.Bird> flockMembers = flock.getBirds();
     if (!isLeader) {
       Position leaderPosition = flock.getLeader().getPos();
@@ -90,17 +98,29 @@ public class BirdX extends flockbase.Bird {
     int yt = getTarget().getY();
     double dy = 0.0D;
     double dx = 0.0D;
-    boolean targetState = false;
+    // boolean targetState = false;
+    // Position pos1, pos2, pos3;
+    // pos1 = flock.cohesion(this);
+    // pos2 = flock.keepDistance(this);
+    // pos3 = flock.matchVelocity(this);
+
+    // int dx = pos1.getX() + pos2.getX() + pos3.getX();
+    // int dy = pos1.getY() + pos2.getY() + pos3.getY();
+
+    // int X = speed.getX() + dx;
+    // int Y = speed.getY() + dy;
+
+    // setSpeed(X, Y);
+
+    // int currX = getPos().getX();
+    // int currY = getPos().getY();
+
+    // currX = currX + X;
+    // currY = currY + Y;
+    // setPos(currX, currY);
     if (isWithinTarget()) {
-      if (targetState) {
-        dx = 2.0D;
-        dy = 2.0D;
-        targetState = false;
-      } else {
-        dx = -2.0D;
-        dy = -2.0D;
-        targetState = true;
-      }
+      dx = 0.0D;
+      dy = 0.0D;
     } else {
         if (xt == x) {
           if (yt > y) {
@@ -148,15 +168,40 @@ public class BirdX extends flockbase.Bird {
           //   dx *= speed; 
           //   dy = m * dx;
           // } else {
-            dx *= speed; 
+            dx *= speed.getX(); 
             dy = m * dx;
           }
         }
       }
     // }
 
-    if ((x + (int) dx <= 1000 && y + (int) dy <= 1000) || (x + (int) dx >= 0 && y + (int) dy >= 0))
+    
+      Position pos2;
+      // pos1 = flock.cohesion(this);
+      pos2 = flock.keepDistance(this);
+      // pos2 = flock.matchVelocity(this);
+      
+      // double X = speed.getX() + pos2.getX();
+      // double Y = speed.getY() + pos2.getY();
+
+      // setSpeed((int)X, (int)Y);
+      
+      double Dx = dx + pos2.getX();
+      double Dy = dy + pos2.getY();
+
+    // int currX = getPos().getX();
+    // int currY = getPos().getY();
+
+    // currX = currX + X;
+    // currY = currY + Y;
+    // setPos(currX, currY);      
+    if (((x + (int) dx) < 950 && (y + (int) dy) < 950) || ((x + (int) dx) > 50 && (y + (int) dy) > 50)) {
+      System.out.println(x+" "+y);
+      setPos(x + (int) Dx, y + (int) Dy);
+      System.out.println("---------");
+    } else {
       setPos(x + (int) dx, y + (int) dy);
+    }
   }
 
   public void becomeLeader() {
