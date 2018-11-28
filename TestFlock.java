@@ -25,7 +25,7 @@ public class TestFlock {
 	
 		
 		FlockDisplay disp = new SwingDisplay();
-		//FlockDisplay disp = new TextDisplay();
+		// FlockDisplay disp = new TextDisplay();
 		
 		App app = new App(disp);
 		disp.setApp(app);
