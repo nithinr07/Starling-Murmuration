@@ -63,6 +63,46 @@ public class BirdX extends flockbase.Bird {
     return newPosition;
   }
 
+  public Position cohesion() {
+    Position newPosition = new Position();
+    newPosition.setPos(0, 0);
+    int x = 0;
+    int y = 0;
+    ArrayList<Bird> birds = getFlock().getBirds();
+    for(Bird b : birds) {
+      if(b != this) {
+        x = x + b.getPos().getX();
+        y = y + b.getPos().getY();
+      }
+    }
+    x = x / (birds.size() - 1);
+    y = y / (birds.size() - 1);
+    x = (x - getPos().getX()) / 100;
+    y = (y - getPos().getY()) / 100;
+    newPosition.setPos(x, y);
+    return newPosition;
+  }
+
+  public Position matchVelocity() {
+    Position newPosition = new Position();
+    newPosition.setPos(0, 0);
+    int x = 0;
+    int y = 0;
+    ArrayList<Bird> birds = getFlock().getBirds();
+    for(Bird b : birds) {
+      if(b != this) {
+        x = x + b.getSpeed().getX();
+        y = y + b.getSpeed().getY();
+      }
+    }
+    x = x / (birds.size() - 1);
+    y = y / (birds.size() - 1);
+    x = (x - getSpeed().getX()) / 8;
+    y = (y - getSpeed().getY()) / 8;
+    newPosition.setPos(x, y);
+    return newPosition;
+  }
+
   protected void updatePos() {
     Position currPos = getPos();
     int x = currPos.getX();
@@ -110,18 +150,18 @@ public class BirdX extends flockbase.Bird {
           }
         }
       }
-      Position pos2;
-      // pos1 = flock.cohesion(this);
+      Position pos1, pos2, pos3;
+      pos1 = cohesion();
       pos2 = keepDistance();
-      // pos2 = flock.matchVelocity(this);
+      pos3 = matchVelocity();
       
-      // double X = speed.getX() + pos2.getX();
-      // double Y = speed.getY() + pos2.getY();
+      double X = speed.getX() + pos3.getX();
+      double Y = speed.getY() + pos3.getY();
 
-      // setSpeed((int)X, (int)Y);
+      setSpeed((int)X, (int)Y);
       
-      double Dx = dx + pos2.getX();
-      double Dy = dy + pos2.getY();
+      double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX();
+      double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY();
       
     if (((x + (int) dx) < 950 && (y + (int) dy) < 950) || ((x + (int) dx) > 50 && (y + (int) dy) > 50)) {
       System.out.println(x+" "+y);
