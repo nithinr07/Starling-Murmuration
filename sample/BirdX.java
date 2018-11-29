@@ -160,8 +160,8 @@ public class BirdX extends flockbase.Bird {
 
       setSpeed((int)X, (int)Y);
       
-      double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX();
-      double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY();
+      double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX() + X;
+      double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY() + Y;
       
     if (((x + (int) dx) < 950 && (y + (int) dy) < 950) || ((x + (int) dx) > 50 && (y + (int) dy) > 50)) {
       System.out.println(x+" "+y);
