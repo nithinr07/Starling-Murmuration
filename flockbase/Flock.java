@@ -22,7 +22,7 @@ abstract public class Flock {
 	
 	// abstract public Position cohesion(Bird bird);
 
-	abstract public Position keepDistance(Bird bird);
+	// abstract public Position keepDistance(Bird bird);
 
 	// abstract public Position matchVelocity(Bird bird);
 

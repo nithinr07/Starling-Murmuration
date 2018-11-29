@@ -57,23 +57,22 @@ public class FlockY extends flockbase.Flock {
     return newPosition;
   }
 
-  public Position keepDistance(Bird bird) {
-    Position newPosition = new Position();
-    newPosition.setPos(0, 0);
-    int x = 0;
-    int y = 0;
-    for(Bird b : birds) {
-      if(b != bird) {
-        if((Math.abs(b.getPos().getX() - bird.getPos().getX()) < 50) && (Math.abs(b.getPos().getY() - bird.getPos().getY()) < 50)) {
-          x = x - (b.getPos().getX() - bird.getPos().getX());
-          y = y - (b.getPos().getY() - bird.getPos().getY());
-        }
-      }
-    }
-    System.out.println(x);
-    newPosition.setPos(x, y);
-    return newPosition;
-  }
+  // public Position keepDistance(Bird bird) {
+  //   Position newPosition = new Position();
+  //   newPosition.setPos(0, 0);
+  //   int x = 0;
+  //   int y = 0;
+  //   for(Bird b : birds) {
+  //     if(b != bird) {
+  //       if((Math.abs(b.getPos().getX() - bird.getPos().getX()) < 50) && (Math.abs(b.getPos().getY() - bird.getPos().getY()) < 50)) {
+  //         x = x - (b.getPos().getX() - bird.getPos().getX());
+  //         y = y - (b.getPos().getY() - bird.getPos().getY());
+  //       }
+  //     }
+  //   }
+  //   newPosition.setPos(x, y);
+  //   return newPosition;
+  // }
 
   public Position matchVelocity(Bird bird) {
     Position newPosition = new Position();
