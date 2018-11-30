@@ -51,9 +51,10 @@ public class BirdX extends flockbase.Bird {
     newPosition.setPos(0, 0);
     int x = 0;
     int y = 0;
-    for(Bird b : getFlock().getBirds()) {
-      if(b != this) {
-        if((Math.abs(b.getPos().getX() - getPos().getX()) < 50) && (Math.abs(b.getPos().getY() - getPos().getY()) < 50)) {
+    for (Bird b : getFlock().getBirds()) {
+      if (b != this) {
+        if ((Math.abs(b.getPos().getX() - getPos().getX()) < 50)
+            && (Math.abs(b.getPos().getY() - getPos().getY()) < 50)) {
           x = x - (b.getPos().getX() - getPos().getX());
           y = y - (b.getPos().getY() - getPos().getY());
         }
@@ -69,8 +70,8 @@ public class BirdX extends flockbase.Bird {
     int x = 0;
     int y = 0;
     ArrayList<Bird> birds = getFlock().getBirds();
-    for(Bird b : birds) {
-      if(b != this) {
+    for (Bird b : birds) {
+      if (b != this) {
         x = x + b.getPos().getX();
         y = y + b.getPos().getY();
       }
@@ -89,8 +90,8 @@ public class BirdX extends flockbase.Bird {
     int x = 0;
     int y = 0;
     ArrayList<Bird> birds = getFlock().getBirds();
-    for(Bird b : birds) {
-      if(b != this) {
+    for (Bird b : birds) {
+      if (b != this) {
         x = x + b.getSpeed().getX();
         y = y + b.getSpeed().getY();
       }
@@ -120,55 +121,48 @@ public class BirdX extends flockbase.Bird {
       dx = 0.0D;
       dy = 0.0D;
     } else {
-        if (xt == x) {
-          if (yt > y) {
-            dy = 1.0D;
+      if (xt == x) {
+        if (yt > y) {
+          dy = 1.0D;
+        } else
+          dy = -1.0D;
+        dx = 0.0D;
+      } else {
+        if (yt == y) {
+          if (xt > x) {
+            dx = 1.0D;
           } else
-            dy = -1.0D;
-          dx = 0.0D;
-        } else {
-          if (yt == y) {
-            if (xt > x) {
-              dx = 1.0D;
-            } else
-              dx = -1.0D;
-            dy = 0.0D;
+            dx = -1.0D;
+          dy = 0.0D;
         } else {
           double m = (double) (yt - y) / (xt - x);
           if (xt > x) {
             dx = 1.0D;
           } else
             dx = -1.0D;
-          if(m > 50.0 || m < -50.0) {
-            if(m > 0)
-              m = 50.0D;
+          if (m > 10.0 || m < -10.0) {
+            if (m > 0)
+              m = 10.0D;
             else
-              m = -50.0D; 
+              m = -10.0D;
           }
-            dx *= speed.getX(); 
-            dy = m * dx;
-          }
+          dx *= speed.getX();
+          dy = m * dx;
         }
       }
-      Position pos1, pos2, pos3;
-      pos1 = cohesion();
-      pos2 = keepDistance();
-      pos3 = matchVelocity();
-      
-      double X = speed.getX() + pos3.getX();
-      double Y = speed.getY() + pos3.getY();
+    }
+    Position pos1, pos2, pos3;
+    pos1 = cohesion();
+    pos2 = keepDistance();
+    pos3 = matchVelocity();
 
-      setSpeed((int)X, (int)Y);
-      
-      double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX() + X;
-      double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY() + Y;
-      
-    if (((x + (int) dx) < 950 && (y + (int) dy) < 950) || ((x + (int) dx) > 50 && (y + (int) dy) > 50)) {
-      System.out.println(x+" "+y);
+    double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX();
+    double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY();
+
+    if (((x + (int) Dx) < 1000 || (y + (int) Dy) < 1000) || ((x + (int) Dx) > 0 || (y + (int) Dy) > 0)) {
       setPos(x + (int) Dx, y + (int) Dy);
-      System.out.println("---------");
     } else {
-      setPos(x + (int) dx, y + (int) dy);
+      setPos(x, y);
     }
   }
 
