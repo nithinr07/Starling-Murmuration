@@ -113,48 +113,51 @@ public class BirdX extends flockbase.Bird {
       Position leaderPosition = flock.getLeader().getPos();
       setTarget(leaderPosition.getX(), leaderPosition.getY());
     }
-    int xt = getTarget().getX();
-    int yt = getTarget().getY();
-    double dy = 0.0D;
-    double dx = 0.0D;
+    int xTarget = getTarget().getX();
+    int yTarget = getTarget().getY();
+    double dy = 0.0;
+    double dx = 0.0;
     if (isWithinTarget()) {
-      dx = 0.0D;
-      dy = 0.0D;
+      dx = 0.0;
+      dy = 0.0;
     } else {
-      if (xt == x) {
-        if (yt > y) {
-          dy = 1.0D;
+      if (xTarget == x) {
+        if (yTarget > y) {
+          dy = 1.0;
         } else
-          dy = -1.0D;
-        dx = 0.0D;
+          dy = -1.0;
+        dx = 0.0;
       } else {
-        if (yt == y) {
-          if (xt > x) {
-            dx = 1.0D;
+        if (yTarget == y) {
+          if (xTarget > x) {
+            dx = 1.0;
           } else
-            dx = -1.0D;
-          dy = 0.0D;
+            dx = -1.0;
+          dy = 0.0;
         } else {
-          double m = (double) (yt - y) / (xt - x);
-          if (xt > x) {
-            dx = 1.0D;
+          double slope = (double) (yTarget - y) / (xTarget - x);
+          if (xTarget > x) {
+            dx = 1.0;
           } else
-            dx = -1.0D;
-          if (m > 10.0 || m < -10.0) {
-            if (m > 0)
-              m = 10.0D;
+            dx = -1.0;
+          if (slope > 10.0 || slope < -10.0) {
+            if (slope > 0)
+              slope = 10.0D;
             else
-              m = -10.0D;
+              slope = -10.0D;
           }
           dx *= speed.getX();
-          dy = m * dx;
+          dy = slope * dx;
         }
       }
     }
     Position pos1, pos2, pos3;
+    // boids algorithm //
     pos1 = cohesion();
     pos2 = keepDistance();
     pos3 = matchVelocity();
+    
+    setSpeed(speed.getX() + pos3.getX(), speed.getY() + pos3.getY());
 
     double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX();
     double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY();
