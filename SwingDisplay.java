@@ -68,7 +68,7 @@ class SwingDisplay implements FlockDisplay {
 					i++;
 					Position loc = bird.getPos();
 					// next few lines can be replaced with any other interesting way of drawing birds
-					g.drawOval(loc.getX(), loc.getY(), 10, 10);
+					g.fillOval(loc.getX(), loc.getY(), 10, 10);
 					g.drawString(bird.getName(),
 						 loc.getX() , loc.getY() );
 				}

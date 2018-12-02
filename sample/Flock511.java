@@ -6,11 +6,11 @@ import flockbase.Position;
 
 import java.util.ArrayList;
 
-public class FlockY extends flockbase.Flock {
+public class Flock511 extends flockbase.Flock {
   private ArrayList<Bird> birds = new ArrayList<>();
   Bird lead = null;
 
-  public FlockY() {
+  public Flock511() {
   }
 
   public void addBird(Bird b) {
@@ -40,7 +40,7 @@ public class FlockY extends flockbase.Flock {
 
   public flockbase.Flock split(int pos) {
     Bird birdAtPos = birds.get(pos);
-    Flock flockZ = new FlockY();
+    Flock flockZ = new Flock511();
     birdAtPos.becomeLeader();
     flockZ.addBird(birdAtPos);
     flockZ.setLeader(birdAtPos);

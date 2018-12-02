@@ -7,12 +7,12 @@ import flockbase.Position;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-public class BirdX extends flockbase.Bird {
+public class Bird511 extends flockbase.Bird {
   private Position speed = new Position(10, 10);
   private boolean isLeader;
   private double radius = 50.0D;
 
-  public BirdX() {
+  public Bird511() {
   }
 
   public String getName() {
@@ -84,25 +84,25 @@ public class BirdX extends flockbase.Bird {
     return newPosition;
   }
 
-  public Position matchVelocity() {
-    Position newPosition = new Position();
-    newPosition.setPos(0, 0);
-    int x = 0;
-    int y = 0;
-    ArrayList<Bird> birds = getFlock().getBirds();
-    for (Bird b : birds) {
-      if (b != this) {
-        x = x + b.getSpeed().getX();
-        y = y + b.getSpeed().getY();
-      }
-    }
-    x = x / (birds.size() - 1);
-    y = y / (birds.size() - 1);
-    x = (x - getSpeed().getX()) / 8;
-    y = (y - getSpeed().getY()) / 8;
-    newPosition.setPos(x, y);
-    return newPosition;
-  }
+  // public Position matchVelocity() {
+  //   Position newPosition = new Position();
+  //   newPosition.setPos(0, 0);
+  //   int x = 0;
+  //   int y = 0;
+  //   ArrayList<Bird> birds = getFlock().getBirds();
+  //   for (Bird b : birds) {
+  //     if (b != this) {
+  //       x = x + b.getSpeed().getX();
+  //       y = y + b.getSpeed().getY();
+  //     }
+  //   }
+  //   x = x / (birds.size() - 1);
+  //   y = y / (birds.size() - 1);
+  //   x = (x - getSpeed().getX()) / 8;
+  //   y = (y - getSpeed().getY()) / 8;
+  //   newPosition.setPos(x, y);
+  //   return newPosition;
+  // }
 
   protected void updatePos() {
     Position currPos = getPos();
@@ -154,16 +154,16 @@ public class BirdX extends flockbase.Bird {
         }
       }
     }
-    Position pos1, pos2, pos3;
+    Position pos1, pos2;
     // boids algorithm //
     pos1 = cohesion();
     pos2 = keepDistance();
-    pos3 = matchVelocity();
+    // pos3 = matchVelocity();
     
-    setSpeed(speed.getX() + pos3.getX(), speed.getY() + pos3.getY());
+    // setSpeed(speed.getX() + pos1.getX(), speed.getY() + pos1.getY());
 
-    double Dx = dx + pos1.getX() + pos2.getX() + pos3.getX();
-    double Dy = dy + pos1.getY() + pos2.getY() + pos3.getY();
+    double Dx = dx + pos1.getX() + pos2.getX();
+    double Dy = dy + pos1.getY() + pos2.getY();
 
     if (((x + (int) Dx) < 1000 || (y + (int) Dy) < 1000) || ((x + (int) Dx) > 0 || (y + (int) Dy) > 0)) {
       setPos(x + (int) Dx, y + (int) Dy);

@@ -18,7 +18,7 @@ abstract public class Bird {
 		return flock;
 	}
 
-	abstract public Position getSpeed();
+	// abstract public Position getSpeed();
 
 	// Set the position of the bird
 	public void setPos(int x, int y) {

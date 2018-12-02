@@ -8,21 +8,46 @@ import sample.*;
 
 public class TestFlock {
 	public static void main(String[] args) {
-		Flock f = new FlockY(); // where FlockX is a concrete derived class of Flock
+		Flock f = new Flock511(); // where FlockX is a concrete derived class of Flock
 
 		// add a bunch of birds
 
 		// repeat the above for the different derived classes of bird
-		Bird b1 = new BirdX(); // where BirdX is a derived concrete class of Bird
+		Bird b1 = new Bird511(); // where Bird511 is a derived concrete class of Bird
 		b1.setPos(10,10);
 		f.addBird(b1);
 		
-		for(int i=0;i<5;i++){
-			Bird b = new BirdX();
-			b.setPos(i*100,  10);
-			f.addBird(b);
-		}
-	
+		// for(int i=0;i<3;i++){
+			// }
+			
+			// Bird b2 = new Bird511();
+			// b2.setPos(i*100,  10);
+			// f.addBird(b2);
+			
+		Bird b3 = new Bird523();
+		b3.setPos(100,  10);
+		f.addBird(b3);		
+		
+		// Bird b4 = new Bird2017016("eric");
+		// b4.setPos(200,  10);
+		// f.addBird(b4);	
+		
+		Bird b5 = new Bird2017028();
+		b5.setPos(200,  10);
+		f.addBird(b5);
+			
+		Bird b2 = new Bird511();
+		b2.setPos(500,  10);
+		f.addBird(b2);
+
+		
+		Bird b6 = new Bird523();
+		b6.setPos(300,  10);
+		f.addBird(b6);	
+
+		Bird b7 = new Bird043();
+		b7.setPos(400,  10);
+		f.addBird(b7);	
 		
 		FlockDisplay disp = new SwingDisplay();
 		// FlockDisplay disp = new TextDisplay();
