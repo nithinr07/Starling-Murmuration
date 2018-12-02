@@ -148,6 +148,9 @@ public class BirdX extends flockbase.Bird {
           }
           dx *= speed.getX();
           dy = slope * dx;
+          if(dy > 100.0) {
+            dy = dy / 10.0;
+          }
         }
       }
     }
